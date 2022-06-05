@@ -11,6 +11,16 @@ const jwt = require('jsonwebtoken');
 
 const app = express();
 
+const multer = require('multer');
+
+const upload = multer({
+    dest: 'images'
+});
+
+app.post('/upload', upload.single('upload'), (req,res) => {
+    res.send();
+})
+
 // app.use((req, res, next) => {
 //     console.log(req.method, req.path);
 //     next();
@@ -20,7 +30,7 @@ const app = express();
 //     res.status(503).send();
 // });
 
-const port =  process.env.PORT || 3001;
+const port =  3001;
 app.use(express.json());
 
 app.use(bodyParser.json());
