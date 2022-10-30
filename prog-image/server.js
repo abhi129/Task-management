@@ -1,7 +1,6 @@
 const express = require("express")
 const app = express()
 const http = require("http").createServer(app)
-
 const port = process.env.port || 3000;
 
 const mongoClient = require("mongodb").MongoClient
@@ -96,7 +95,7 @@ http.listen(port, function () {
         app.get("/", async function (request, result) {
             console.log(request)
             let outputImages = []
-            if (request.fields != undefined) {
+            if (request.fields.imagePath != undefined) {
                 const images = await db.collection("images").find({images:{"$in": [request.fields.imagePath]}}).toArray()
                 console.log(images)
 
