@@ -1,0 +1,39 @@
+<form onsubmit="uploadMultipleImages()" enctype="multipart/form-data">
+    <input type="file" multiple accept="image/*" name="images" required />
+ 
+    <input type="submit" value="Upload images" />
+</form>
+
+<script>
+    function uploadMultipleImages() {
+        // This prevent the form from reloading
+        event.preventDefault()
+ 
+        // get tag of the form
+        const form = event.target
+ 
+        // data object of the <form> is create
+        const formData = new FormData(form)
+ 
+        // create AJAX object
+        const ajax = new XMLHttpRequest()
+ 
+        // 1st parameter = method, GET/POST
+        // 2nd parameter = path to server file
+        // 3rd parameter = asynchronous
+        ajax.open("POST", "/uploadImages", true)
+ 
+        // when status of request changes
+        ajax.onreadystatechange = function () {
+            //completed
+            if (this.readyState == 4) {
+                if (this.status == 200) {
+                    console.log(this.responseText)
+                }
+            }
+        }
+ 
+        //Send the AJAX request
+        ajax.send(formData)
+    }
+</script>
